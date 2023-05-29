@@ -19,11 +19,14 @@ async function register({ body }: Request, res: Response){
     let user = await User.create({ username: body.username, password: body.password });
     res.success({ id_user: user._id.toString() ?? null });
 }
-// username
+// username, user_id
 async function get_profil({ params }: Request, res: Response){
-    let user = await User.findOne({ username: params.username }, { _id: 0, password: 0, __v: 0 }).lean();
-    if(user) res.success(user);
-    else res.err();
+    let cur = ("user_id" in params) ? await User.findById(params.user_id).select({ username: 1 }) : null;
+    let col: {} =  { _id: 1, password: 0, __v: 0 };
+
+    if(cur != null && params.username == cur.username) Object.assign(col, { ril: 1, fek: 1, following: 1 });
+    let user = await User.findOne({ username: params.username }, col).lean();
+    if(user) res.success(user); else res.err();
 }
 // user_id, profil, description
 async function post_profil({ body, file }: Request, res: Response){
@@ -34,5 +37,23 @@ async function post_profil({ body, file }: Request, res: Response){
     await User.updateOne({ _id: body.user_id }, { profil: file?.filename, description: body.description });
     res.success();
 }
+// user_id, username
+async function follow({ body }: Request, res: Response){
+    if(body.missing("user_id", "username")) return res.missing();
+    let follow = await User.countDocuments({ username: body.username });
+    let user = await User.findById(body.user_id).select({ username: 1, following: 1 });
+    if(follow < 1 || user == null) return res.err("User not found!");
 
-export default { login, register, get_profil, post_profil };
+    let isFollowing = user?.following.includes(body.username);
+    res.success(`Success ${isFollowing ? "un" : ""}follow`);
+    
+    if(isFollowing){
+        await User.updateOne({ _id: body.user_id }, { $pull: { following: body.username } });
+        await User.updateOne({ username: body.username }, { $pull: { followers: user.username } });
+    } else {
+        await User.updateOne({ _id: body.user_id }, { $push: { following: body.username } });
+        await User.updateOne({ username: body.username }, { $push: { followers: user.username } });
+    }
+}
+
+export default { login, register, follow, get_profil, post_profil };
