@@ -1,3 +1,4 @@
+import { User } from "@mongoose";
 import express from "express";
 
 declare global {
@@ -6,6 +7,7 @@ declare global {
             success: (data?: any) => void;
             err: (message?: string | null) => void;
             missing: () => void;
+            user_exist: (user_id: string) => boolean
         }
         export interface Request {
             body: {
@@ -35,7 +37,12 @@ export default function (req: express.Request, res: express.Response, next: expr
         missing: {
             enumerable: false,
             configurable: true,
-            value: () => res.err("Missing column!")
+            value: () => res.err("Missing field")
+        },
+        user_exist: {
+            enumerable: false,
+            configurable: false,
+            value: async (user_id: string) => (await User.countDocuments({ _id: user_id })) > 0
         }
     });
     const missing = function(this: {}, ...args: string[]){
