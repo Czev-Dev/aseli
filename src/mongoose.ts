@@ -6,5 +6,13 @@ connect(`mongodb://${env.DB_HOST}`, { dbName: env.DB_NAME })
 
 export const User = model("User", new Schema({
     username: String,
-    password: String
+    password: String,
+    description: {
+        default: null,
+        type: String
+    },
+    profil: {
+        default: null,
+        type: String
+    }
 }));
