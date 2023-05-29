@@ -6,6 +6,7 @@ import path from "path";
 import "./mongoose";
 import user from "./routes/user";
 import check_body from "./middleware/check_body";
+import check_user_id from "./middleware/check_user_id";
 
 const app = express();
 const storage = multer.diskStorage({
@@ -26,11 +27,14 @@ app.use("/uploads", express.static("./uploads"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(check_body);
+app.use(check_user_id);
 
 // Routes
 app.post("/user/login", user.login);
 app.post("/user/register", user.register);
-app.get("/user/profil/:username", user.get_profil);
+app.post("/user/follow", user.follow);
+
+app.get("/user/profil/:username/:user_id?", user.get_profil);
 app.post("/user/profil", [upload.single("profil"), check_body], user.post_profil);
 
 export default app;
