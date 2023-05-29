@@ -8,11 +8,19 @@ export const User = model("User", new Schema({
     username: String,
     password: String,
     description: {
-        default: null,
-        type: String
+        type: String,
+        default: null
+    },
+    following: {
+        type: [String],
+        default: []
+    },
+    followers: {
+        type: [String],
+        default: []
     },
     profil: {
-        default: null,
-        type: String
+        type: String,
+        default: null
     }
 }));
