@@ -4,10 +4,8 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
 import android.media.ImageReader
-import android.os.Handler
 import android.util.Log
 import android.view.Surface
-import android.view.SurfaceView
 import java.util.Vector
 
 class CameraCaptureDeviceCallback(private val imageReader: ImageReader) :
