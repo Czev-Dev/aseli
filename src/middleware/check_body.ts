@@ -41,7 +41,7 @@ export default function (req: express.Request, res: express.Response, next: expr
         },
         user_exist: {
             enumerable: false,
-            configurable: false,
+            configurable: true,
             value: async (user_id: string) => (await User.countDocuments({ _id: user_id })) > 0
         }
     });
