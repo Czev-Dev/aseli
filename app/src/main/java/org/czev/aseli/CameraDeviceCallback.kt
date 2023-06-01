@@ -11,7 +11,6 @@ import java.util.Vector
 class CameraDeviceCallback(private val cameraPreview: SurfaceView) :
     CameraDevice.StateCallback() {
     private val TAG = this.javaClass.simpleName
-    var cameraCaptureSession: CameraCaptureSession? = null
     var cameraDevice: CameraDevice? = null
 
     override fun onOpened(cameraDevice: CameraDevice) {
