@@ -13,7 +13,7 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:fontFamily="@font/quantico_regular"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:text="aseli"/>
     <TextView
         android:id="@+id/login_alert"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/login_edittext"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:drawableLeft="@drawable/icon_person"
         android:drawablePadding="10dp"
         android:hint="Username"/>
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/login_edittext"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:drawableLeft="@drawable/icon_lock"
         android:drawablePadding="10dp"
         android:inputType="textPassword"
@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:textSize="16sp"
         android:background="@drawable/login_button"
         android:fontFamily="@font/poppins_semibold"
         android:textAllCaps="false"
@@ -73,12 +74,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:text="Gak punya akun?"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="#04C4CC"
             android:text=" Buat dong"/>
     </LinearLayout>
