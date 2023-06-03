@@ -5,59 +5,28 @@
     android:orientation="vertical"
     android:background="#2C3333"
     android:clipChildren="false">
-    <SurfaceView
-        android:id="@+id/post_camera_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:gravity="bottom"
-        android:layout_marginTop="-110dp"
-        android:paddingBottom="20dp"
-        android:clipChildren="false">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:onClick="onPostTakePhoto"
+        android:paddingTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:weightSum="3">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1">
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:onClick="onPostChangeFacingCamera"
-                    android:background="@drawable/icon_replay"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/post_button_camera"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:onClick="onPostTakePicture"
-                    android:background="@drawable/icon_camera_button"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-    </RelativeLayout>
+            android:text="Capture from camera"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/icon_camera"/>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="30dp"
-        android:paddingHorizontal="3dp"
-        android:background="@drawable/post_images_background">
+        android:paddingTop="20dp"
+        android:paddingHorizontal="3dp">
         <GridLayout
             android:id="@+id/post_images"
             android:layout_width="match_parent"
