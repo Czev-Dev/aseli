@@ -6,7 +6,7 @@
     android:background="@drawable/main_background"
     android:orientation="vertical"
     android:paddingHorizontal="40dp"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
+        android:onClick="onLoginToRegister"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
