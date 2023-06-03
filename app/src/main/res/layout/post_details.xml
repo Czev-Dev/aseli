@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:paddingVertical="13dp"
+        android:paddingRight="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_details_profil"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+        <TextView
+            android:id="@+id/post_details_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="15sp"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:background="#00000000"
+            android:src="@drawable/icon_more_menu"
+            android:layout_gravity="center" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/post_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:paddingVertical="13dp"
+        android:paddingRight="15dp">
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_nyata"
+            android:scaleType="fitXY"
+            android:background="#00000000"/>
+        <TextView
+            android:id="@+id/post_details_ril"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:layout_marginLeft="5dp"
+            android:gravity="bottom"
+            android:fontFamily="@font/poppins_regular"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="nyata"
+            android:layout_marginLeft="5dp"
+            android:gravity="bottom"
+            android:fontFamily="@font/poppins_regular"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_komen"
+            android:scaleType="fitXY"
+            android:background="#00000000"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/post_details_comment_total"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:layout_marginLeft="5dp"
+            android:gravity="bottom"
+            android:fontFamily="@font/poppins_regular"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="komen"
+            android:layout_marginLeft="5dp"
+            android:gravity="bottom"
+            android:fontFamily="@font/poppins_regular"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_share"
+            android:scaleType="fitXY"
+            android:background="#00000000"
+            android:layout_marginLeft="15dp"/>
+    </LinearLayout>
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:paddingLeft="25dp"-->
+    <!--                android:paddingVertical="13dp"-->
+    <!--                android:paddingRight="15dp">-->
+    <!--                <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--                    android:layout_width="45dp"-->
+    <!--                    android:layout_height="45dp"-->
+    <!--                    android:src="@drawable/img"/>-->
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:text="raja_wengdev"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:gravity="center"-->
+    <!--                    android:fontFamily="@font/poppins_medium"-->
+    <!--                    android:textSize="15sp"/>-->
+    <!--                <Space-->
+    <!--                    android:layout_width="0dp"-->
+    <!--                    android:layout_height="0dp"-->
+    <!--                    android:layout_weight="1"/>-->
+    <!--                <ImageButton-->
+    <!--                    android:layout_width="30dp"-->
+    <!--                    android:layout_height="30dp"-->
+    <!--                    android:scaleType="fitXY"-->
+    <!--                    android:background="#00000000"-->
+    <!--                    android:src="@drawable/icon_more_menu"-->
+    <!--                    android:layout_gravity="center" />-->
+    <!--            </LinearLayout>-->
+</LinearLayout>
