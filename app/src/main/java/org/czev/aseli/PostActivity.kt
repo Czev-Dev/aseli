@@ -1,62 +1,74 @@
 package org.czev.aseli
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.hardware.camera2.CameraManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.ContactsContract.AUTHORITY
+import android.provider.ContactsContract.DisplayPhoto
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.SurfaceHolder
-import android.view.SurfaceView
 import android.view.View
 import android.widget.GridLayout
 import android.widget.ImageView
-import android.widget.LinearLayout.LayoutParams
-import androidx.annotation.RequiresApi
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
-class PostActivity : AppCompatActivity(), SurfaceHolder.Callback {
-    private var cameraController: CameraController? = null
-    private lateinit var surfaceView: SurfaceView
-    private var reinit: Boolean = false
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+class PostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-            || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES), 1)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
+        }
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         } else {
             setGalleryImages()
-            surfaceView = findViewById(R.id.post_camera_view)
-            surfaceView.holder.addCallback(this)
-
-            val facingFront = intent.getBooleanExtra("reinit", false)
-            reinit = facingFront
-            val cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
-            cameraController = CameraController(cameraManager, surfaceView, facingFront)
         }
     }
-    fun onPostChangeFacingCamera(_v: View){
-        cameraController?.getCameraDevice()?.close()
-        startActivity(Intent(this, this@PostActivity.javaClass).putExtra("reinit", !reinit))
+    private lateinit var imageUri: Uri
+    private val getResult = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if(!it) return@registerForActivityResult
+        val photo = contentResolver.openInputStream(imageUri) ?: return@registerForActivityResult
+        val date = SimpleDateFormat("ss-mm-hh dd-MM-yyyy", Locale.getDefault())
+        val movedPhoto = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+            "aseli-image " + date.format(Date()) + ".png")
+        photo.copyTo(FileOutputStream(movedPhoto))
+        startActivity(Intent(this, PostPreviewActivity::class.java)
+            .putExtra("image", movedPhoto.absolutePath))
+        photo.close()
         finish()
     }
-    fun onPostTakePicture(v: View){}
-    @RequiresApi(Build.VERSION_CODES.Q)
+    fun onPostTakePhoto(v: View){
+        try {
+            val file = File.createTempFile("IMG_", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES))
+            imageUri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+            getResult.launch(imageUri)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
     private fun setGalleryImages(){
         try {
             val images = getAllFilesInDirectoriesSortedByDate()
@@ -64,19 +76,22 @@ class PostActivity : AppCompatActivity(), SurfaceHolder.Callback {
             for (image in images){
                 val layout = LayoutInflater.from(this).inflate(R.layout.post_image, grid, false) as ConstraintLayout
                 val imgView = layout.findViewById<ImageView>(R.id.post_image_view)
-                Log.d("Image Path", image.absolutePath)
                 Glide.with(this).load(image).centerCrop().into(imgView)
+                layout.setOnClickListener {
+                    startActivity(Intent(this, PostPreviewActivity::class.java)
+                        .putExtra("image", image.absolutePath))
+                    finish()
+                }
                 grid.addView(layout)
             }
         } catch (e: Exception){
             e.printStackTrace()
         }
     }
-    @RequiresApi(Build.VERSION_CODES.Q)
     fun getAllFilesInDirectoriesSortedByDate(): List<File> {
         val files = mutableListOf<File>()
-        val paths = listOf(Environment.DIRECTORY_DCIM, Environment.DIRECTORY_DOCUMENTS, Environment.DIRECTORY_DCIM,
-        Environment.DIRECTORY_DOWNLOADS, Environment.DIRECTORY_SCREENSHOTS, Environment.DIRECTORY_PICTURES)
+        val paths = listOf(Environment.DIRECTORY_DCIM, Environment.DIRECTORY_DOCUMENTS,
+        Environment.DIRECTORY_DOWNLOADS, Environment.DIRECTORY_PICTURES)
         for (path in paths){
             val allowed = arrayOf(".jpg", ".png", ".jpeg", ".gif")
             val file = Environment.getExternalStoragePublicDirectory(path).listFiles {
@@ -94,44 +109,4 @@ class PostActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
         return files
     }
-//    fun onTakePicture(v: View){
-//        cameraController?.getCameraCaptureSession()?.close()
-//        val imageView = findViewById<ImageView>(R.id.post_image)
-//        val cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
-//        val imageReader = ImageReader.newInstance(surfaceView.width, surfaceView.height, ImageFormat.JPEG, 1)
-//        val cameraCaptureController = CameraCaptureController(cameraManager, imageReader)
-//        cameraCaptureController.startCameraPreview()
-//
-//        imageReader.setOnImageAvailableListener({it
-//            val buffer: ByteBuffer = it.acquireLatestImage().planes[0].buffer
-//            val bytes = ByteArray(buffer.capacity())
-//            buffer[bytes]
-//            val bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, null)
-//
-//            val matrix = Matrix()
-//            matrix.postRotate(90f)
-//            val rotatedBitmap = Bitmap.createBitmap(bitmapImage, 0, 0, bitmapImage.width, bitmapImage.height, matrix, true)
-//            imageView.setImageBitmap(rotatedBitmap)
-//
-//            bitmapImage.recycle()1
-//            rotatedBitmap.recycle()
-//            it.acquireLatestImage().close()
-//        }, null)
-//    }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        for(result in grantResults){
-            if(result == PackageManager.PERMISSION_DENIED) finish()
-            else recreate()
-        }
-    }
-    override fun surfaceCreated(holder: SurfaceHolder) {
-        cameraController?.startCameraPreview()
-    }
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}
-    override fun surfaceDestroyed(holder: SurfaceHolder) {}
 }
