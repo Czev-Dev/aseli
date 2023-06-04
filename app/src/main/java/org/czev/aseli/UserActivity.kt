@@ -4,7 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -163,6 +167,27 @@ class UserDetailsFragment : Fragment() {
                         layout.findViewById<TextView>(R.id.post_details_comment_total).text = dat.getJSONArray("comments").length().toString()
                         layout.findViewById<ImageView>(R.id.post_details_profil).setImageDrawable(userImage)
                         layout.findViewById<TextView>(R.id.post_details_username).text = userName
+
+                        val oriDesc = dat.getString("description")
+                        val splitted = oriDesc.split("\r\n|\n|\r")
+                        var desc = splitted[0]
+                        var spannable: SpannableStringBuilder? = null
+                        if(splitted.size > 1 || desc.length > 100) {
+                            if(desc.length > 100) desc = desc.substring(0, 100) + "... "
+                            else desc += "\n"
+                            desc += "Baca selengkapnya"
+                            spannable = SpannableStringBuilder(desc)
+                            val colorSpan = ForegroundColorSpan(Color.parseColor("#04C4CC"))
+                            spannable.setSpan(colorSpan, desc.lastIndexOf("Baca selengkapnya") ,desc.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        }
+                        val description = layout.findViewById<TextView>(R.id.post_details_description)
+                        var isDetail = false
+                        if(spannable != null) (description.parent as LinearLayout).setOnClickListener {
+                            if(!isDetail) description.text = oriDesc
+                            else description.text = spannable
+                            isDetail = !isDetail
+                        }
+                        description.text = spannable ?: oriDesc
                         Glide.with(activity).load("$BASE_URL/uploads/" +
                                 data.getJSONObject(i).getString("imageName")).into(layout.findViewById(R.id.post_details_image))
                         userDetails.addView(layout)
