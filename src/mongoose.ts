@@ -19,6 +19,14 @@ export const User = model("user", new Schema({
         type: String,
         default: null
     },
+    ril: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
+    fek: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
     following: {
         type: [String],
         default: []
@@ -41,11 +49,11 @@ export const Post = model("post", new Schema({
         default: Date.now
     },
     ril: {
-        type: Array,
+        type: [Schema.Types.ObjectId],
         default: []
     },
     fek: {
-        type: Array,
+        type: [Schema.Types.ObjectId],
         default: []
     },
     comments: {
