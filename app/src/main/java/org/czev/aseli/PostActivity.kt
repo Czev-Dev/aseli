@@ -40,6 +40,12 @@ class PostActivity : AppCompatActivity() {
             setGalleryImages()
         }
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        startActivity(Intent(this, UserActivity::class.java))
+        finish()
+    }
     private lateinit var imageUri: Uri
     private val getResult = registerForActivityResult(ActivityResultContracts.TakePicture()) {
         if(!it) return@registerForActivityResult
@@ -81,7 +87,7 @@ class PostActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-    fun getAllFilesInDirectoriesSortedByDate(): List<File> {
+    private fun getAllFilesInDirectoriesSortedByDate(): List<File> {
         val files = mutableListOf<File>()
         val paths = listOf(Environment.DIRECTORY_DCIM, Environment.DIRECTORY_DOCUMENTS,
         Environment.DIRECTORY_DOWNLOADS, Environment.DIRECTORY_PICTURES)
