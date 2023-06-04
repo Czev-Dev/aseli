@@ -48,29 +48,29 @@
         android:paddingVertical="13dp"
         android:paddingEnd="15dp">
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/icon_nyata"
             android:scaleType="fitXY"
             android:background="#00000000"/>
         <TextView
             android:id="@+id/post_details_ril"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="0"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:gravity="bottom"
-            android:fontFamily="@font/poppins_regular"/>
+            android:textSize="13sp"
+            android:text="0" />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="nyata"
             android:layout_marginStart="5dp"
             android:gravity="bottom"
-            android:fontFamily="@font/poppins_regular"/>
+            android:textSize="13sp"/>
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/icon_komen"
             android:scaleType="fitXY"
             android:background="#00000000"
@@ -78,24 +78,30 @@
         <TextView
             android:id="@+id/post_details_comment_total"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="0"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:gravity="bottom"
-            android:fontFamily="@font/poppins_regular"/>
+            android:textSize="13sp"
+            android:text="0"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="komen"
             android:layout_marginStart="5dp"
-            android:gravity="bottom"
-            android:fontFamily="@font/poppins_regular"/>
+            android:textSize="13sp"
+            android:gravity="bottom"/>
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/icon_share"
             android:scaleType="fitXY"
             android:background="#00000000"
             android:layout_marginStart="15dp"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/post_details_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:textSize="14sp"/>
 </LinearLayout>
