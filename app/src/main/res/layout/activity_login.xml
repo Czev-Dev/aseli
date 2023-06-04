@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
     android:orientation="vertical"
     android:paddingHorizontal="40dp"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:fontFamily="@font/quantico_regular"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:text="aseli"/>
     <TextView
         android:id="@+id/login_alert"
@@ -24,17 +23,18 @@
         android:layout_marginBottom="-20dp"
         android:visibility="gone"
         android:gravity="center"
-        android:textColor="#FBFF47"
-        android:text="Login gagal!"/>
+        android:textColor="#FBFF47"/>
     <EditText
         android:id="@+id/login_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/login_edittext"
-        android:textSize="16dp"
-        android:drawableLeft="@drawable/icon_person"
+        android:textSize="16sp"
+        android:drawableStart="@drawable/icon_person"
         android:drawablePadding="10dp"
+        android:inputType="text"
+        android:autofillHints="username"
         android:hint="Username"/>
     <EditText
         android:id="@+id/login_password"
@@ -42,23 +42,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/login_edittext"
-        android:textSize="16dp"
-        android:drawableLeft="@drawable/icon_lock"
+        android:textSize="16sp"
+        android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="10dp"
         android:inputType="textPassword"
+        android:autofillHints="password"
         android:hint="Password"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="#04C4CC"
-        android:gravity="right"
+        android:gravity="end"
         android:text="Lupa password?"/>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:textSize="16sp"
         android:background="@drawable/login_button"
         android:fontFamily="@font/poppins_semibold"
         android:textAllCaps="false"
@@ -70,16 +72,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
+        android:onClick="onLoginToRegister"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:text="Gak punya akun?"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textColor="#04C4CC"
             android:text=" Buat dong"/>
     </LinearLayout>

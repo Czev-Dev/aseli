@@ -1,12 +1,12 @@
 package org.czev.aseli
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -18,11 +18,15 @@ import org.json.JSONObject
 import java.io.IOException
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var BASE_URL: String;
+    private lateinit var BASE_URL: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BASE_URL = resources.getString(R.string.base_url)
         setContentView(R.layout.activity_register)
+    }
+    fun onRegisterToLogin(v: View){
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
     fun onRegister(v: View){
         v.isClickable = false
@@ -63,8 +67,18 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val data = JSONObject(response.body?.string())
-                this@RegisterActivity.runOnUiThread { view( if(data.getBoolean("success")) "Login sukses" else data.getString("message")) }
+                val data = response.body?.string()?.let { JSONObject(it) } ?: return
+                if(data.getBoolean("success")){
+                    val pref = getSharedPreferences("user_data", MODE_PRIVATE).edit()
+                    pref.putString("username", findViewById<EditText>(R.id.register_username).text.toString())
+                    pref.putString("id_user", data.getJSONObject("data").getString("id_user"))
+                    pref.apply()
+
+                    startActivity(Intent(this@RegisterActivity, UserActivity::class.java))
+                    finish()
+                } else {
+                    this@RegisterActivity.runOnUiThread { view( data.getString("message")) }
+                }
             }
         })
     }
