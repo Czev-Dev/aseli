@@ -16,13 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/quantico_regular"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:text="aseli"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right">
+            android:gravity="end">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -37,7 +37,7 @@
         android:layout_marginTop="55dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,6 +56,7 @@
                         android:layout_marginTop="10dp"
                         android:paddingHorizontal="20dp"
                         android:weightSum="10"
+                        android:baselineAligned="false"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent">
@@ -63,7 +64,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:paddingRight="10dp"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="10dp"
                             android:gravity="top">
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/user_profil_image"
@@ -79,13 +81,14 @@
                                 android:id="@+id/user_username"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="18dp"
+                                android:textSize="18sp"
                                 android:fontFamily="@font/poppins_medium"/>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:layout_marginTop="5dp"
+                                android:baselineAligned="false"
                                 android:weightSum="3">
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -105,7 +108,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:textSize="14dp"
+                                            android:textSize="14sp"
                                             android:text="Postingan"/>
                                     </LinearLayout>
                                 </LinearLayout>
@@ -113,7 +116,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:gravity="right">
+                                    android:gravity="end">
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -128,7 +131,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:textSize="14dp"
+                                            android:textSize="14sp"
                                             android:text="Pengikut"/>
                                     </LinearLayout>
                                 </LinearLayout>
@@ -136,7 +139,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:gravity="right">
+                                    android:gravity="end">
                                     <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -151,7 +154,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:textSize="14dp"
+                                            android:textSize="14sp"
                                             android:text="Diikuti"/>
                                     </LinearLayout>
                                 </LinearLayout>
@@ -168,9 +171,9 @@
                                     android:layout_height="28dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/user_button"
-                                    android:layout_marginRight="5dp"
+                                    android:layout_marginEnd="5dp"
                                     android:textAllCaps="false"
-                                    android:textSize="12dp"
+                                    android:textSize="12sp"
                                     android:gravity="center"
                                     android:text="Edit Profile"/>
                                 <androidx.appcompat.widget.AppCompatButton
@@ -178,9 +181,9 @@
                                     android:layout_height="28dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/user_button2"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginStart="5dp"
                                     android:textAllCaps="false"
-                                    android:textSize="12dp"
+                                    android:textSize="12sp"
                                     android:gravity="center"
                                     android:text="Bagikan Profile"/>
                             </LinearLayout>
@@ -191,7 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="20dp"
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         app:layout_constraintTop_toBottomOf="@id/user_linear_layout"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -226,6 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
+                android:baselineAligned="false"
                 android:background="@drawable/user_menu_background"
                 android:paddingVertical="10dp"
                 android:weightSum="3">

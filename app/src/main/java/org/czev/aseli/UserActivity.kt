@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
@@ -103,9 +102,6 @@ class UserActivity : AppCompatActivity() {
         override fun getItemCount(): Int {
             return fragments.size
         }
-        fun getFragment(position: Int): Fragment {
-            return fragments[position]
-        }
         override fun createFragment(position: Int): Fragment {
             return fragments[position]
         }
@@ -174,22 +170,6 @@ class UserDetailsFragment : Fragment() {
                 }
             }
         })
-
-//        val scroll = mainLayout.findViewById<ScrollView>(R.id.fragment_user_details_scroll)
-//        val profilLayout = activity.findViewById<ConstraintLayout>(R.id.user_profil_layout)
-//        scroll.setOnScrollChangeListener {
-//            view: View, i: Int, i1: Int, i2: Int, i3: Int ->
-//            if(scroll.scrollY > 0) {
-//                profilLayout.translationY = -scroll.scrollY.toFloat()
-//                val height = profilLayout.height - scroll.scrollY
-//                val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, if(height > 1) height else 0)
-//                profilLayout.layoutParams = params
-//            } else {
-//                profilLayout.translationY = 0f
-//                val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-//                profilLayout.layoutParams = params
-//            }
-//        }
         return mainLayout
     }
 }

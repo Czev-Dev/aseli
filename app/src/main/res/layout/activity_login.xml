@@ -23,8 +23,7 @@
         android:layout_marginBottom="-20dp"
         android:visibility="gone"
         android:gravity="center"
-        android:textColor="#FBFF47"
-        android:text="Login gagal!"/>
+        android:textColor="#FBFF47"/>
     <EditText
         android:id="@+id/login_username"
         android:layout_width="match_parent"
@@ -32,8 +31,10 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/login_edittext"
         android:textSize="16sp"
-        android:drawableLeft="@drawable/icon_person"
+        android:drawableStart="@drawable/icon_person"
         android:drawablePadding="10dp"
+        android:inputType="text"
+        android:autofillHints="username"
         android:hint="Username"/>
     <EditText
         android:id="@+id/login_password"
@@ -42,16 +43,17 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/login_edittext"
         android:textSize="16sp"
-        android:drawableLeft="@drawable/icon_lock"
+        android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="10dp"
         android:inputType="textPassword"
+        android:autofillHints="password"
         android:hint="Password"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="#04C4CC"
-        android:gravity="right"
+        android:gravity="end"
         android:text="Lupa password?"/>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
