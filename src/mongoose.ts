@@ -41,7 +41,7 @@ export const User = model("user", new Schema({
     }
 }));
 export const Post = model("post", new Schema({
-    userId: Schema.Types.ObjectId,
+    user_id: Schema.Types.ObjectId,
     description: String,
     imageName: String,
     time: {
@@ -58,12 +58,38 @@ export const Post = model("post", new Schema({
     },
     comments: {
         type: [{
+            _id: false,
+            comment_id: {
+                type: Schema.Types.ObjectId,
+                auto: true
+            },
             username: String,
             comment: String,
+            ril: {
+                type: [Schema.Types.ObjectId],
+                default: []
+            },
             time: {
                 type: Date,
                 default: Date.now
-            }
+            },
+            replies: [{
+                _id: false,
+                reply_id: {
+                    type: Schema.Types.ObjectId,
+                    auto: true
+                },
+                username: String,
+                comment: String,
+                ril: {
+                    type: [Schema.Types.ObjectId],
+                    default: []
+                },
+                time: {
+                    type: Date,
+                    default: Date.now
+                }
+            }]
         }],
         default: []
     }
