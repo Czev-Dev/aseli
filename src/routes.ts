@@ -19,6 +19,7 @@ app.get("/post/:page?", post.get);
 app.post("/post", [upload.single("image"), check_user_id, check_body], post.post);
 app.post("/post/ril", [check_user_id, check_post_id], post.ril);
 app.post("/post/fek", [check_user_id, check_post_id], post.fek);
+app.post("/post/comment", [check_user_id, check_post_id], post.comment)
 
 app.post("/user/login", user.login);
 app.post("/user/register", user.register);
