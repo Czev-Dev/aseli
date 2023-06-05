@@ -28,7 +28,7 @@ async function get_profil({ params }: Request, res: Response){
     let userSame = cur != null && params.username == cur.username;
     if(userSame) Object.assign(col, { ril: 1, fek: 1 });
     let user = await User.findOne({ username: params.username }).select(col);
-    let posts =  await Post.countDocuments({ userId: user?._id });
+    let posts =  await Post.countDocuments({ user_id: user?._id });
     if(user == null) return res.err("User not found!");
 
     if(user) res.success(userSame ? user :
