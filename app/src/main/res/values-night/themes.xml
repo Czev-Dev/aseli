@@ -9,6 +9,7 @@
 
     <style name="TextViewStyle" parent="Base.Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">#FFF</item>
     </style>
 
     <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button">
