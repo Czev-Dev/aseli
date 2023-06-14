@@ -43,5 +43,6 @@
         <activity android:name=".PostActivity"/>
         <activity android:name=".PostPreviewActivity"/>
         <activity android:name=".CommentActivity"/>
+        <activity android:name=".ProfilActivity"/>
     </application>
 </manifest>
