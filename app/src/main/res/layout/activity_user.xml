@@ -175,6 +175,7 @@
                                     android:textAllCaps="false"
                                     android:textSize="12sp"
                                     android:gravity="center"
+                                    android:onClick="onUserEditProfil"
                                     android:text="Edit Profile"/>
                                 <androidx.appcompat.widget.AppCompatButton
                                     android:layout_width="0dp"
