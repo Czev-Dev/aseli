@@ -79,6 +79,10 @@ class UserActivity : AppCompatActivity() {
         startActivity(Intent(this, PostActivity::class.java))
         finish()
     }
+    fun onUserEditProfil(v: View){
+        startActivity(Intent(this, ProfilActivity::class.java))
+        finish()
+    }
     override fun onStart() {
         super.onStart()
         val pref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
